@@ -12,9 +12,7 @@
 */
 
 // PAGE ROUTES
-
-Route::get('/', 'PagesController@index')->name('landing_page');
-Route::get('/login', 'PagesController@user_login')->name('login');
+Route::get('/', 'PagesController@user_login')->name('login');
 Route::get('/dashboard', 'PagesController@user_dashboard')->name('dashboard');
 Route::get('/admin', 'PagesController@admin_dashboard')->name('admin');
 Route::get('/attendance/log', 'PagesController@admin_logs')->name('admin_logs');

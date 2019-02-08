@@ -13,7 +13,6 @@
 					<form action="{{ route('check_login') }}" method="post" >
 						@csrf
 						@include('include.messages')
-						<input type="text" name="current_user" style="display:none" value="{{ $current_UID }}">
 
 						<div class="form-group">
 							<div class="row mt-3">

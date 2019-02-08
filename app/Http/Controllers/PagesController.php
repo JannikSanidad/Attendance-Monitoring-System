@@ -9,22 +9,13 @@ use Session;
 
 class PagesController extends Controller
 {
-    public function index() {
-        if (User::check()) {
-            return redirect('dashboard');
-        }
-    	return view('index');
-    }
 
     public function user_login() {
         if (User::check()) {
             return redirect('dashboard');
         } 
-        if (Session::has('current_UID')) {
-            $current_UID = Session::get('current_UID');
-            return view('login')->with('current_UID', $current_UID);
-        }
-        return redirect('/');
+  
+        return view('login');
     }
 
     public function user_logout() {
@@ -41,7 +32,7 @@ class PagesController extends Controller
     }
 
     public function user_dashboard() {
-        if (User::check() || Session::has('admin')) {
+        if (User::check()) {
             $user_id = User::user();
             $user = User::where('admin_id', $user_id)->first();
             if (Session::has('student_id')) {

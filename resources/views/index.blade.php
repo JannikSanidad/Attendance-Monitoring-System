@@ -58,10 +58,8 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 text-center vertical-centered">
-			<img class="float-left" id="mmsu-logo" src="{{ asset('/image/mmsu.png') }}" width="300px">
-			<img class="float-right" id="itc-logo" src="{{ asset('/image/itc.png') }}" width="300px">
-			<h1 id="title">Mariano Marcos State University</h1>
-			<h2 id="sub-title">Attendance Monitoring System</h2>
+
+			<h1 id="sub-title">Attendance Monitoring System</h1>
 			<form action="{{ route('check_unlock') }}" method="post" class="">
 				@csrf
 				<div class="form-group">

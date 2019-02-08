@@ -11,50 +11,30 @@ use Session;
 
 class PostsController extends Controller
 {
-    // POST ROUTE FUNCTIONS
-
-    public function checkUnlock(Request $req) {
-        $admin_id = $req->admin_id;
-
-        //ADMIN LOGIN
-        if ($admin_id == "admin") {
-            Session::put('admin', $admin_id);
+    public function checkLogin(Request $req) {
+    	if ($req->username == 'admin' && $req->password == 'admin') {
+            Session::put('admin', $req->username);
             return redirect('/admin');
         }
 
-        //NORMAL USER LOGIN
-        $user = User::find($admin_id);
-        
-        if ($user) {
-        	Session::put('current_UID', $admin_id);
-        	return redirect('/login')->with('success', 'Welcome '.$user->first_name.' '.$user->last_name.'! Please log in');
-        } else {
-        	return redirect('/')->with('error', 'User not found!');
-        }
-    }
-
-    public function checkLogin(Request $req) {
-    	$current_UID = $req->current_user;
-    	$username = $req->username;
+        $username = $req->username;
     	$password = md5($req->password);
 
-    	$user = User::find($current_UID);
+    	$user = User::where('username', $username)->where('password', $password)->first();
 
-        if ($user->login_status == 1) {
-            return redirect('/')->with('error', 'User is logged in!');
-        }
-    	if ($user->username == $username && $user->password == $password) {
-    		User::where('admin_ID', $current_UID)->update([
-    			'login_status' => 1,
-    			'location' => $req->location
-    		]);
+    	if ($user) {
+            $current_UID = $user->admin_id;
+
+    		$user->login_status = 1;
+            $user->location = $req->location;
+            $user->save();
 
     		User::login($current_UID);
     		Session::put('location' , $req->location);
     		return redirect('/dashboard');
     	}
 
-    	return redirect('/login')->with('success', 'Welcome '.$user->first_name.' '.$user->last_name.'! Please log in')->with('error', 'Incorrect Username or Password!');
+    	return redirect('/')->with('error', 'Incorrect Username or Password!');
     }
 
     public function scan(Request $req) {

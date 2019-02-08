@@ -164,7 +164,7 @@
             
             <div class="card" id="email">
                 <div class="card-body">
-                    For assistance and technical support, please email us at: <span style="color:blue">itc-support@mmsu.edu.ph</span>
+                    For assistance and technical support, please email us at: <span style="color:blue">it-support@university.edu.ph</span>
                 </div>
             </div>
 
