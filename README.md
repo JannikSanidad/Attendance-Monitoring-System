@@ -1,2 +1,2 @@
 # Attendance-Monitoring-System
-This is a repo for my internship project
+An Attendance Monitoring System with Barcode Integration built in Laravel Framework
